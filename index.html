@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Apprentissage pour enfants</title>
+    <style>
+        body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: #fff4e6;
+        }
+        h1 { color: #ff6f61; margin-top: 20px; }
+
+        .button {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 20px;
+            background: #ffd9c0;
+            color: #333;
+            text-decoration: none;
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background 0.2s;
+            cursor: pointer;
+        }
+        .button:hover {
+            transform: scale(1.1);
+            background: #ffb380;
+        }
+
+        .section { display: none; padding: 20px; }
+        .active { display: block; }
+
+        .letter, .number {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px;
+            background: #fff7f0;
+            border-radius: 15px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .letter:hover, .number:hover { transform: scale(1.2); }
+
+        img { width: 80px; height: 80px; }
+
+        /* ألوان مختلفة لكل قسم */
+        #letters { background: #fffae3; }
+        #numbers { background: #e3f7ff; }
+    </style>
+</head>
+<body>
+
+    <h1>👶 Bienvenue à l'apprentissage !</h1>
+
+    <div>
+        <button class="button" onclick="showSection('home')">Accueil</button>
+        <button class="button" onclick="showSection('letters')">Apprendre les lettres 📖</button>
+        <button class="button" onclick="showSection('numbers')">Apprendre les chiffres 🔢</button>
+    </div>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="home" class="section active">
+        <p>Choisissez une section pour commencer l'apprentissage !</p>
+    </div>
+
+    <!-- صفحة الحروف -->
+    <div id="letters" class="section">
+        <h1>📖 Apprendre les lettres</h1>
+        <!-- ضع هنا الحروف كـ div ثابت -->
+        <div class="letter" onclick="playSound('a.mp3')">
+            <h2>A</h2>
+            <img src="static/images/a.png">
+        </div>
+        <div class="letter" onclick="playSound('b.mp3')">
+            <h2>B</h2>
+            <img src="static/images/b.png">
+        </div>
+        <!-- أضف باقي الحروف بنفس الطريقة -->
+    </div>
+
+    <!-- صفحة الأرقام -->
+    <div id="numbers" class="section">
+        <h1>🔢 Apprendre les chiffres</h1>
+        <div class="number" onclick="playSound('1.mp3')">
+            <h2>1</h2>
+            <img src="static/images/1.png">
+        </div>
+        <div class="number" onclick="playSound('2.mp3')">
+            <h2>2</h2>
+            <img src="static/images/2.png">
+        </div>
+        <!-- أضف باقي الأرقام بنفس الطريقة -->
+    </div>
+
+    <audio id="audio" src=""></audio>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function playSound(filename) {
+            const audio = document.getElementById('audio');
+            audio.src = "static/sounds/" + filename;
+            audio.play();
+        }
+    </script>
+
+</body>
+</html>
