@@ -53,3 +53,58 @@
     </a>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Apprendre les lettres</title>
+    <style>
+        body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            background: #fffae3;
+            text-align: center;
+        }
+        h1 {
+            color: #ff6f61;
+        }
+        .letter {
+            display: inline-block;
+            margin: 15px;
+            padding: 20px;
+            background: #fff7f0;
+            border-radius: 15px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .letter:hover {
+            transform: scale(1.2);
+            background: #ffd9c0;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📖 Apprendre les lettres</h1>
+    {% for letter in letters %}
+        <div class="letter" onclick="playSound('{{ letter.sound }}')">
+            <h2>{{ letter.char }}</h2>
+            <img src="{{ url_for('static', filename='images/' + letter.image) }}">
+        </div>
+    {% endfor %}
+
+    <audio id="audio" src=""></audio>
+
+    <script>
+        function playSound(filename) {
+            const audio = document.getElementById('audio');
+            audio.src = "{{ url_for('static', filename='sounds/') }}" + filename;
+            audio.play();
+        }
+    </script>
+</body>
+</html>
+
