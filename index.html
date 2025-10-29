@@ -72,35 +72,52 @@
     <!-- صفحة الحروف -->
     <div id="letters" class="section">
         <h1>📖 Apprendre les lettres</h1>
-        <!-- ضع هنا الحروف كـ div ثابت -->
-        <div class="letter" onclick="playSound('a.mp3')">
-            <h2>A</h2>
-            <img src="static/images/a.png">
-        </div>
-        <div class="letter" onclick="playSound('b.mp3')">
-            <h2>B</h2>
-            <img src="static/images/b.png">
-        </div>
-        <!-- أضف باقي الحروف بنفس الطريقة -->
     </div>
 
     <!-- صفحة الأرقام -->
     <div id="numbers" class="section">
         <h1>🔢 Apprendre les chiffres</h1>
-        <div class="number" onclick="playSound('1.mp3')">
-            <h2>1</h2>
-            <img src="static/images/1.png">
-        </div>
-        <div class="number" onclick="playSound('2.mp3')">
-            <h2>2</h2>
-            <img src="static/images/2.png">
-        </div>
-        <!-- أضف باقي الأرقام بنفس الطريقة -->
     </div>
 
     <audio id="audio" src=""></audio>
 
     <script>
+        // بيانات الحروف
+        const letters = [
+            {char: 'A', image: 'a.png', sound: 'a.mp3'},
+            {char: 'B', image: 'b.png', sound: 'b.mp3'},
+            {char: 'C', image: 'c.png', sound: 'c.mp3'},
+            {char: 'D', image: 'd.png', sound: 'd.mp3'},
+            {char: 'E', image: 'e.png', sound: 'e.mp3'},
+            {char: 'F', image: 'f.png', sound: 'f.mp3'},
+            {char: 'G', image: 'g.png', sound: 'g.mp3'},
+            {char: 'H', image: 'h.png', sound: 'h.mp3'},
+            {char: 'I', image: 'i.png', sound: 'i.mp3'},
+            {char: 'J', image: 'j.png', sound: 'j.mp3'},
+            {char: 'K', image: 'k.png', sound: 'k.mp3'},
+            {char: 'L', image: 'l.png', sound: 'l.mp3'},
+            {char: 'M', image: 'm.png', sound: 'm.mp3'},
+            {char: 'N', image: 'n.png', sound: 'n.mp3'},
+            {char: 'O', image: 'o.png', sound: 'o.mp3'},
+            {char: 'P', image: 'p.png', sound: 'p.mp3'},
+            {char: 'Q', image: 'q.png', sound: 'q.mp3'},
+            {char: 'R', image: 'r.png', sound: 'r.mp3'},
+            {char: 'S', image: 's.png', sound: 's.mp3'},
+            {char: 'T', image: 't.png', sound: 't.mp3'},
+            {char: 'U', image: 'u.png', sound: 'u.mp3'},
+            {char: 'V', image: 'v.png', sound: 'v.mp3'},
+            {char: 'W', image: 'w.png', sound: 'w.mp3'},
+            {char: 'X', image: 'x.png', sound: 'x.mp3'},
+            {char: 'Y', image: 'y.png', sound: 'y.mp3'},
+            {char: 'Z', image: 'z.png', sound: 'z.mp3'}
+        ];
+
+        // بيانات الأرقام من 1 إلى 99
+        const numbers = [];
+        for(let i = 1; i <= 99; i++){
+            numbers.push({num: i, image: i + '.png', sound: i + '.mp3'});
+        }
+
         function showSection(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
@@ -111,6 +128,26 @@
             audio.src = "static/sounds/" + filename;
             audio.play();
         }
+
+        // إنشاء الحروف ديناميكيًا
+        const lettersDiv = document.getElementById('letters');
+        letters.forEach(letter => {
+            const div = document.createElement('div');
+            div.className = 'letter';
+            div.onclick = () => playSound(letter.sound);
+            div.innerHTML = `<h2>${letter.char}</h2><img src="static/images/${letter.image}">`;
+            lettersDiv.appendChild(div);
+        });
+
+        // إنشاء الأرقام ديناميكيًا
+        const numbersDiv = document.getElementById('numbers');
+        numbers.forEach(number => {
+            const div = document.createElement('div');
+            div.className = 'number';
+            div.onclick = () => playSound(number.sound);
+            div.innerHTML = `<h2>${number.num}</h2><img src="static/images/${number.image}">`;
+            numbersDiv.appendChild(div);
+        });
     </script>
 
 </body>
